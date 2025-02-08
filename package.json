@@ -4,6 +4,7 @@
   "description": "A semantic language for creating consistent AI prompts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "license": "MIT",
   "bin": {
     "prompter": "./dist/cli/index.js"
   },
@@ -25,7 +26,6 @@
     "compiler"
   ],
   "author": "",
-  "license": "MIT",
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
