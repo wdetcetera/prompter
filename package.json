@@ -1,10 +1,31 @@
 {
-  "name": "prompter-language",
+  "name": "@wpopera/prompter-language",
   "version": "1.0.0",
   "description": "A semantic language for creating consistent AI prompts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "preferGlobal": true,
+  "author": {
+    "name": "Domenico Rutigliano",
+    "email": "info@wpopera.co"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wdetcetera/prompter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wdetcetera/prompter/issues"
+  },
+  "homepage": "https://github.com/wdetcetera/prompter#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "bin": {
     "prompter": "./dist/cli/index.js"
   },
@@ -16,7 +37,8 @@
     "clean": "rimraf dist",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write \"src/**/*.ts\"",
-    "start": "ts-node src/cli/index.ts"
+    "start": "ts-node src/cli/index.ts",
+    "prepublishOnly": "yarn clean && yarn build"
   },
   "keywords": [
     "ai",
@@ -25,7 +47,6 @@
     "language",
     "compiler"
   ],
-  "author": "",
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
