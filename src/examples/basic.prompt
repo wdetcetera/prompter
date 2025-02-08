@@ -1,0 +1,132 @@
+// Basic prompt definition
+prompt ExamplePrompt {
+  source: file("./templates/base.txt") {
+    format: "text";
+    encoding: "utf-8";
+  }
+
+  // Variables that can be used in the template
+  variables {
+    name: string;
+    age: number;
+    skills: string[];
+  }
+
+  // Validation rules for variables
+  validation {
+    name: required, minLength(2), maxLength(50);
+    age: required, min(0), max(150);
+    skills: required, minItems(1), maxItems(10);
+  }
+
+  // Processing rules
+  processing {
+    // Pre-processing steps
+    before {
+      trim(name);
+      lowercase(skills);
+    }
+
+    // Post-processing steps
+    after {
+      replaceAll("{{name}}", name);
+      replaceAll("{{age}}", age);
+      replaceAll("{{skills}}", join(skills, ", "));
+    }
+  }
+
+  // Output configuration
+  output {
+    format: "text";
+    maxLength: 2000;
+    temperature: 0.7;
+    model: "claude-3-sonnet";
+  }
+}
+
+// Prompt with URL source
+prompt WebBasedPrompt {
+  source: url("https://example.com/template") {
+    depth: 0;
+    timeout: 5000;
+  }
+
+  variables {
+    query: string;
+    filters: {
+      date: string;
+      category: string;
+    };
+  }
+
+  validation {
+    query: required, minLength(3);
+    filters.date: optional, format("YYYY-MM-DD");
+    filters.category: optional, oneOf(["news", "blog", "article"]);
+  }
+
+  processing {
+    before {
+      trim(query);
+      defaultValue(filters.category, "news");
+    }
+  }
+
+  output {
+    format: "json";
+    schema: {
+      type: "object",
+      properties: {
+        title: { type: "string" },
+        content: { type: "string" },
+        metadata: {
+          type: "object",
+          properties: {
+            source: { type: "string" },
+            date: { type: "string" }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Prompt with Git source
+prompt GitBasedPrompt {
+  source: git("https://github.com/example/repo.git") {
+    branch: "main";
+    depth: 1;
+    include: ["docs/**/*.md"];
+    exclude: ["**/internal/**"];
+  }
+
+  variables {
+    context: string;
+    style: "formal" | "casual" | "technical";
+  }
+
+  validation {
+    context: required;
+    style: required, oneOf(["formal", "casual", "technical"]);
+  }
+
+  processing {
+    before {
+      trim(context);
+    }
+
+    after {
+      applyStyle(style);
+      addMetadata("source", "git");
+      addMetadata("timestamp", now());
+    }
+  }
+
+  output {
+    format: "markdown";
+    frontMatter: {
+      template: "docs";
+      version: "1.0";
+    }
+  }
+} 

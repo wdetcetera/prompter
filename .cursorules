@@ -1,0 +1,435 @@
+{
+    "project": {
+        "name": "prompter-language",
+        "type": "nodejs-cli",
+        "description": "A semantic language for creating consistent AI prompts"
+    },
+    "structure": {
+        "src": {
+            "description": "Source code directory",
+            "subdirectories": {
+                "parser": "Lexer and parser implementation",
+                "compiler": "Semantic language to prompt compiler",
+                "cli": "Command-line interface components",
+                "models": "Model-specific prompt adapters",
+                "utils": "Utility functions and helpers"
+            }
+        },
+        "test": {
+            "description": "Test files directory",
+            "pattern": "**/*.test.js"
+        },
+        "examples": {
+            "description": "Example semantic prompts and usage"
+        },
+        "docs": {
+            "description": "Documentation and specifications"
+        }
+    },
+    "rules": {
+        "code": {
+            "style": {
+                "indentation": "spaces",
+                "spaces": 2,
+                "quotes": "single",
+                "semicolons": true,
+                "maxLineLength": 100
+            },
+            "naming": {
+                "files": "kebab-case.js",
+                "classes": "PascalCase",
+                "functions": "camelCase",
+                "constants": "UPPER_SNAKE_CASE",
+                "variables": "camelCase"
+            }
+        },
+        "git": {
+            "commitMessageFormat": "type(scope): description",
+            "types": [
+                "feat",
+                "fix",
+                "docs",
+                "style",
+                "refactor",
+                "test",
+                "chore"
+            ],
+            "branches": {
+                "main": "production ready code",
+                "develop": "development branch",
+                "feature/*": "new features",
+                "fix/*": "bug fixes"
+            }
+        },
+        "documentation": {
+            "required": [
+                "README.md",
+                "API.md",
+                "CONTRIBUTING.md",
+                "LICENSE"
+            ],
+            "jsdoc": {
+                "required": true,
+                "scope": [
+                    "classes",
+                    "methods",
+                    "public functions"
+                ]
+            }
+        },
+        "testing": {
+            "framework": "jest",
+            "coverage": {
+                "statements": 80,
+                "branches": 80,
+                "functions": 80,
+                "lines": 80
+            },
+            "requirements": [
+                "unit tests for all components",
+                "integration tests for CLI",
+                "prompt generation tests",
+                "model-specific tests"
+            ]
+        },
+        "dependencies": {
+            "packageManager": "yarn",
+            "requirements": [
+                "semantic versioning",
+                "lock file must be committed",
+                "regular security audits"
+            ]
+        },
+        "semantic": {
+            "grammar": {
+                "location": "src/parser/grammar.js",
+                "format": "EBNF",
+                "documentation": "required"
+            },
+            "prompts": {
+                "validation": "required",
+                "testing": "required",
+                "versioning": "required"
+            },
+            "tokenManagement": {
+                "model": "claude-3-sonnet-20240229",
+                "contextWindow": {
+                    "maxTokens": 200000,
+                    "warningThreshold": 180000,
+                    "reservedTokens": 5000
+                },
+                "requirements": [
+                    "token counting implementation",
+                    "context splitting strategy",
+                    "token usage optimization",
+                    "memory management"
+                ],
+                "optimization": {
+                    "compression": "required",
+                    "chunking": "required",
+                    "prioritization": "required"
+                },
+                "monitoring": {
+                    "tokenUsageTracking": true,
+                    "contextWindowUtilization": true,
+                    "warningSystem": true
+                },
+                "strategies": {
+                    "contextSplitting": [
+                        "semantic boundaries",
+                        "logical breaks",
+                        "priority-based"
+                    ],
+                    "memoryManagement": [
+                        "sliding window",
+                        "key information retention",
+                        "garbage collection"
+                    ]
+                }
+            },
+            "inputFormats": {
+                "structured": {
+                    "json": {
+                        "validation": "required",
+                        "schema": "optional",
+                        "formatting": "preserve"
+                    },
+                    "xml": {
+                        "validation": "required",
+                        "dtd": "optional",
+                        "namespaces": "supported"
+                    },
+                    "yaml": {
+                        "validation": "required",
+                        "aliases": "supported"
+                    },
+                    "csv": {
+                        "delimiters": ["comma", "tab", "custom"],
+                        "headers": "optional"
+                    },
+                    "markdown": {
+                        "flavors": ["github", "commonmark", "custom"],
+                        "frontmatter": "supported"
+                    }
+                },
+                "unstructured": {
+                    "plaintext": {
+                        "encoding": ["utf-8", "ascii"],
+                        "lineEndings": ["auto-detect", "lf", "crlf"]
+                    },
+                    "rtf": {
+                        "styling": "preserve",
+                        "conversion": "required"
+                    },
+                    "pdf": {
+                        "textExtraction": "required",
+                        "formatting": "best-effort"
+                    }
+                }
+            },
+            "contentStyles": {
+                "professional": {
+                    "businessDocument": {
+                        "types": ["proposal", "report", "memo", "whitepaper"],
+                        "formality": "high",
+                        "tone": "formal"
+                    },
+                    "academic": {
+                        "types": ["research-paper", "thesis", "literature-review"],
+                        "citations": "required",
+                        "tone": "scholarly"
+                    },
+                    "technical": {
+                        "types": ["documentation", "api-spec", "technical-guide"],
+                        "precision": "high",
+                        "audience": "expert"
+                    }
+                },
+                "marketing": {
+                    "socialMedia": {
+                        "platforms": ["linkedin", "twitter", "facebook", "instagram"],
+                        "postTypes": ["update", "article", "story"],
+                        "hashtagSupport": true
+                    },
+                    "content": {
+                        "types": ["blog-post", "newsletter", "press-release"],
+                        "seoOptimization": "required",
+                        "blogPost": {
+                            "seoMetadata": {
+                                "required": [
+                                    "title",
+                                    "metaDescription",
+                                    "canonicalUrl",
+                                    "focusKeyphrase"
+                                ],
+                                "title": {
+                                    "maxLength": 60,
+                                    "requirements": [
+                                        "include focus keyword",
+                                        "front-load important terms",
+                                        "unique per post"
+                                    ]
+                                },
+                                "metaDescription": {
+                                    "maxLength": 155,
+                                    "requirements": [
+                                        "include focus keyword",
+                                        "clear value proposition",
+                                        "call-to-action"
+                                    ]
+                                },
+                                "openGraph": {
+                                    "required": [
+                                        "og:title",
+                                        "og:description",
+                                        "og:image",
+                                        "og:type",
+                                        "og:url"
+                                    ]
+                                },
+                                "twitterCard": {
+                                    "required": [
+                                        "twitter:card",
+                                        "twitter:title",
+                                        "twitter:description",
+                                        "twitter:image"
+                                    ]
+                                },
+                                "schema": {
+                                    "type": "BlogPosting",
+                                    "required": [
+                                        "author",
+                                        "datePublished",
+                                        "dateModified",
+                                        "publisher",
+                                        "mainEntityOfPage"
+                                    ]
+                                }
+                            },
+                            "contentOptimization": {
+                                "structure": {
+                                    "headings": {
+                                        "h1": {
+                                            "count": 1,
+                                            "includeKeyword": true
+                                        },
+                                        "h2": {
+                                            "minCount": 2,
+                                            "maxCount": 8,
+                                            "keywordDensity": "recommended"
+                                        },
+                                        "h3": {
+                                            "recommended": true,
+                                            "subTopicStructure": true
+                                        }
+                                    },
+                                    "paragraphs": {
+                                        "maxLength": 300,
+                                        "readabilityLevel": "8th-grade",
+                                        "transitionWords": "required"
+                                    }
+                                },
+                                "keywords": {
+                                    "focus": {
+                                        "density": {
+                                            "min": 0.5,
+                                            "max": 2.5,
+                                            "unit": "percent"
+                                        },
+                                        "placement": [
+                                            "title",
+                                            "first-paragraph",
+                                            "headings",
+                                            "meta-description",
+                                            "url"
+                                        ]
+                                    },
+                                    "related": {
+                                        "count": {
+                                            "min": 2,
+                                            "max": 5
+                                        },
+                                        "distribution": "natural"
+                                    },
+                                    "lsi": {
+                                        "required": true,
+                                        "contextRelevance": "high"
+                                    }
+                                },
+                                "media": {
+                                    "images": {
+                                        "required": true,
+                                        "optimization": {
+                                            "altText": "required",
+                                            "titleText": "recommended",
+                                            "compression": "required",
+                                            "relevance": "high"
+                                        },
+                                        "featuredImage": {
+                                            "required": true,
+                                            "dimensions": {
+                                                "minWidth": 1200,
+                                                "minHeight": 630
+                                            }
+                                        }
+                                    }
+                                },
+                                "internalLinking": {
+                                    "count": {
+                                        "min": 2,
+                                        "max": 5
+                                    },
+                                    "relevance": "high",
+                                    "anchorText": "descriptive"
+                                },
+                                "externalLinking": {
+                                    "count": {
+                                        "min": 1,
+                                        "max": 3
+                                    },
+                                    "authority": "high",
+                                    "attributes": ["rel=noopener", "target=_blank"]
+                                },
+                                "readability": {
+                                    "fleschKincaid": {
+                                        "target": "60-70",
+                                        "required": true
+                                    },
+                                    "sentenceLength": {
+                                        "max": 20,
+                                        "variety": "required"
+                                    },
+                                    "paragraphLength": {
+                                        "max": 3,
+                                        "unit": "sentences"
+                                    }
+                                },
+                                "userExperience": {
+                                    "tableOfContents": {
+                                        "required": true,
+                                        "threshold": "> 1500 words"
+                                    },
+                                    "scannable": {
+                                        "bulletPoints": "recommended",
+                                        "shortParagraphs": "required",
+                                        "subheadings": "required"
+                                    },
+                                    "engagement": {
+                                        "callToAction": "required",
+                                        "commentSection": "recommended",
+                                        "shareButtons": "required"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "advertising": {
+                        "types": ["ad-copy", "landing-page", "email-campaign"],
+                        "callToAction": "required"
+                    }
+                },
+                "creative": {
+                    "narrative": {
+                        "types": ["story", "article", "essay"],
+                        "tones": ["casual", "formal", "conversational"]
+                    },
+                    "journalism": {
+                        "types": ["news-article", "feature", "editorial", "interview"],
+                        "standards": ["ap-style", "chicago", "custom"]
+                    },
+                    "entertainment": {
+                        "types": ["review", "recap", "listicle"],
+                        "tone": "engaging"
+                    }
+                },
+                "styleAttributes": {
+                    "tone": [
+                        "formal",
+                        "casual",
+                        "technical",
+                        "friendly",
+                        "authoritative",
+                        "persuasive",
+                        "informative",
+                        "entertaining"
+                    ],
+                    "length": {
+                        "units": ["words", "paragraphs", "sections"],
+                        "presets": {
+                            "brief": "< 300 words",
+                            "standard": "300-800 words",
+                            "long": "800-2000 words",
+                            "comprehensive": "> 2000 words"
+                        }
+                    },
+                    "formatting": {
+                        "headings": "supported",
+                        "lists": ["bullet", "numbered", "description"],
+                        "emphasis": ["bold", "italic", "underline"],
+                        "quotes": ["block", "inline"]
+                    }
+                }
+            }
+        }
+    }
+} 

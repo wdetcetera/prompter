@@ -1,0 +1,24 @@
+// Basic news article generation prompt
+prompt NewsArticle {
+  source: url("https://www.afr.com/policy/economy/trump-chaos-business-election-fears-the-new-millionaires-factory-20250207-p5laen") {
+    depth: 0
+  }
+
+  variables {
+    title: string;
+    summary: string;
+    tone: "neutral" | "analytical" | "critical";
+    style: "news" | "editorial" | "feature";
+  }
+
+  validation {
+    title: required;
+    summary: required;
+    tone: required;
+    style: required;
+  }
+
+  output {
+    format: "markdown"
+  }
+} 
