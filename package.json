@@ -1,6 +1,6 @@
 {
   "name": "@wpopera/prompter-language",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A semantic language for creating consistent AI prompts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
