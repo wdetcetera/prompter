@@ -7,19 +7,47 @@ export class Parser {
   private parser: peggy.Parser;
 
   constructor() {
-    const grammarPath = path.join(__dirname, 'grammar.pegjs');
-    const grammar = fs.readFileSync(grammarPath, 'utf-8');
-    this.parser = peggy.generate(grammar, {
-      output: 'parser',
-      format: 'bare',
-      optimize: 'speed',
-      trace: false,
-      allowedStartRules: ['Program'],
-      features: {
-        expected: true,
-        error: true,
-      },
-    });
+    // Try multiple possible locations for the grammar file
+    const possiblePaths = [
+      path.join(__dirname, 'grammar.pegjs'), // When running from source
+      path.join(__dirname, '../../src/parser/grammar.pegjs'), // When installed as package
+      path.join(process.cwd(), 'src/parser/grammar.pegjs') // Fallback to current directory
+    ];
+
+    let grammarContent: string | null = null;
+    let loadedPath: string | null = null;
+
+    for (const grammarPath of possiblePaths) {
+      try {
+        if (fs.existsSync(grammarPath)) {
+          grammarContent = fs.readFileSync(grammarPath, 'utf-8');
+          loadedPath = grammarPath;
+          break;
+        }
+      } catch (error) {
+        // Continue trying other paths
+      }
+    }
+
+    if (!grammarContent || !loadedPath) {
+      throw new Error('Could not find grammar.pegjs file. Make sure the package is installed correctly.');
+    }
+
+    try {
+      this.parser = peggy.generate(grammarContent, {
+        output: 'parser',
+        format: 'bare',
+        optimize: 'speed',
+        trace: false,
+        allowedStartRules: ['Program'],
+        features: {
+          expected: true,
+          error: true,
+        },
+      });
+    } catch (error) {
+      throw new Error(`Failed to generate parser from grammar at ${loadedPath}: ${error}`);
+    }
   }
 
   parse(input: string): Program {
